@@ -1,0 +1,19 @@
+
+<nav class="bg-slate-500">
+  <div class="flex">
+    <a class="will-change-auto text-slate-950 text-3xl font-bold uppercase inline-flex  p-2 hover:tracking-wider rounded-xl" routerLink="/dashbord">{{title}}</a>
+    <div class="container">
+      <ul class="flex gap-4 p-2 justify-end">
+        <li>
+          <button class="will-change-auto flex bg-red-600 px-5 py-2 ring ring-red-700 hover:ring-red-800 hover:bg-red-800 hover:tracking-wider  shadow-md shadow-white rounded-full" (click)="logout()" routerLinkActive="text-white font-extrabold ring-white" >Log out</button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<main>
+  <router-outlet></router-outlet>
+</main>
+
+

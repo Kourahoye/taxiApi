@@ -1,0 +1,35 @@
+<div *ngIf="type != 'chauffeur'; else elseTemplate">
+  <div class="container flex flex-col text-white font-medium justify-between lg:flex-row">
+    <div class="p-2">
+      <button class="flex bg-white/55 min-w-4 text-xl font-bold  text-zinc-100 uppercase max-w-fit will-change-auto bg-emerald-600 px-4 py-2 ring-2 ring-emebg-emerald-700 hover:ring-emebg-emerald-800 hover:bg-emerald-800  shadow-md shadow-white rounded-full">{{ type }} {{ user }}</button>
+    </div>
+    <ul class="flex flex-col gap-4 p-2 justify-end lg:flex-row">
+      <li>
+        <a class="will-change-auto flex bg-blue-600  px-5 py-2 ring ring-blue-700 hover:ring-blue-800 hover:bg-blue-800 hover:tracking-wider shadow-md shadow-white rounded-full" routerLink="moto" routerLinkActive="text-white font-extrabold ring-white">Gestion Moto</a>
+      </li>
+      <li>
+        <a class="will-change-auto flex bg-red-600 px-5 py-2 ring ring-red-700 hover:ring-red-800 hover:bg-red-800 hover:tracking-wider  shadow-md shadow-white rounded-full" routerLink="panne" routerLinkActive="text-white font-extrabold ring-white" >Gestion Panne</a>
+      </li>
+      <li>
+        <a class="will-change-auto flex bg-violet-600 px-5 py-2 ring ring-violet-700 hover:ring-violet-800 hover:bg-violet-800 hover:tracking-wider  shadow-md shadow-white rounded-full" routerLink="entretien" routerLinkActive="text-white font-extrabold ring-white" >Entretien</a>
+    </li>
+    <li>
+      <a class="will-change-auto flex bg-stone-600 px-5 py-2 ring ring-stone-700 hover:ring-stone-800 hover:bg-stone-800 hover:tracking-wider  shadow-md shadow-white rounded-full" routerLink="signUp" routerLinkActive="text-white font-extrabold ring-white" >Inscriptions</a>
+    </li>
+    <li>
+      <a class="will-change-auto flex bg-stone-600 px-5 py-2 ring ring-stone-700 hover:ring-stone-800 hover:bg-stone-800 hover:tracking-wider  shadow-md shadow-white rounded-full" routerLink="recettes" routerLinkActive="text-white font-extrabold ring-white" >Recettes</a>
+    </li>
+    <li>
+      <a class="will-change-auto flex bg-stone-600 px-5 py-2 ring ring-stone-700 hover:ring-stone-800 hover:bg-stone-800 hover:tracking-wider  shadow-md shadow-white rounded-full" routerLink="contrat" routerLinkActive="text-white font-extrabold ring-white" >Contrat</a>
+    </li>
+  </ul>
+</div>
+  <router-outlet></router-outlet>
+</div>
+<ng-template #elseTemplate>
+
+<app-chauffeur></app-chauffeur>
+
+</ng-template>
+
+

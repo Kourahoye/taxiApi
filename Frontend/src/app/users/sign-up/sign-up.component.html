@@ -1,0 +1,140 @@
+
+
+<div class="flex flex-col sm:flex-row w-ful mt-2 gap-3 m-1 p-2">
+  <div class="flex flex-col shadow-inner shadow-slate-950 w-full rounded-md sm:flex-shrink-0 p-1 bg-zinc-300 sm:w-1/3">
+      <h1 class="text-2xl shadow-md shadow-white flex w-full justify-center uppercase font-bold bg-sky-600 p-2 text-white border-2 border-neutral-100" *ngIf="actionOnGoing=='Creation'">{{ actionOnGoing }} user</h1>
+      <h1 class="text-2xl shadow-md shadow-white flex w-full justify-center uppercase font-bold bg-red-600 p-2 text-white border-2 border-neutral-100" *ngIf="actionOnGoing!='Creation'">{{ actionOnGoing }} user</h1>
+      <form [formGroup]="sign_up_form" class="p-8 bg-white bg-opacity-75 shadow-md rounded-md" (ngSubmit)="signUP()" method="post">
+        <h1 class="text-3xl font-bold text-blue-800 mb-8">Inscription</h1>
+
+        <div class="mb-4">
+          <label class="block text-gray-700 text-sm font-bold mb-2" for="Username">Username:</label>
+          <input type="text" [value]="utilisateur_en_cours.username" formControlName="username" id="Username" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500">
+          <div *ngIf="sign_up_form.get('username')?.invalid && sign_up_form.get('username')?.touched" class="text-red-500 text-sm mt-1">
+            Please enter a valid username.
+          </div>
+        </div>
+        <div class="mb-4">
+          <label class="block text-gray-700 text-sm font-bold mb-2" for="type_utlisateur">
+            Type Utlisateur
+          </label>
+          <select id="type_utlisateur" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500" [value]="utilisateur_en_cours.type_utlisateur" formControlName="type_utlisateur">
+            <option value="chauffeur" class="rounded-full text-black hover:bg-sky-600" contenteditable="false">Chauffeur</option>
+            <option  value="manager" class="rounded-full text-black hover:bg-sky-600" contenteditable="false" *ngIf="type_user === 'admin'">Manager</option>
+            <option value="admin" class="rounded-full text-black hover:bg-sky-600" contenteditable="false" *ngIf="type_user === 'admin'">Admin</option>
+          </select>
+        </div>
+        <div class="mb-4">
+          <label class="block text-gray-700 text-sm font-bold mb-2" for="first_name">First Name:</label>
+          <input type="text" [value]="utilisateur_en_cours.first_name" formControlName="first_name" id="first_name" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500">
+          <div *ngIf="sign_up_form.get('first_name')?.invalid && sign_up_form.get('first_name')?.touched" class="text-red-500 text-sm mt-1">
+            Please enter a valid first name.
+          </div>
+        </div>
+
+        <div class="mb-4">
+          <label class="block text-gray-700 text-sm font-bold mb-2" for="last_name">Last Name:</label>
+          <input type="text" [value]="utilisateur_en_cours.last_name" formControlName="last_name" id="last_name" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500">
+          <div *ngIf="sign_up_form.get('last_name')?.invalid && sign_up_form.get('last_name')?.touched" class="text-red-500 text-sm mt-1">
+            Please enter a valid last name.
+          </div>
+        </div>
+
+        <div class="mb-4">
+          <label class="block text-gray-700 text-sm font-bold mb-2" for="addresse">Address:</label>
+          <input type="text" [value]="utilisateur_en_cours.addresse" formControlName="addresse" id="addresse" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500">
+          <div *ngIf="sign_up_form.get('addresse')?.invalid && sign_up_form.get('addresse')?.touched" class="text-red-500 text-sm mt-1">
+            Please enter a valid address.
+          </div>
+        </div>
+
+        <div class="mb-4">
+          <label class="block text-gray-700 text-sm font-bold mb-2" for="telephone">Phone Number:</label>
+          <input type="tel" [value]="utilisateur_en_cours.telephone" formControlName="telephone" id="telephone" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500">
+          <div *ngIf="sign_up_form.get('telephone')?.invalid && sign_up_form.get('telephone')?.touched" class="text-red-500 text-sm mt-1">
+            Please enter a valid phone number.
+          </div>
+        </div>
+
+        <div class="mb-4">
+          <label class="block text-gray-700 text-sm font-bold mb-2" for="password">Password:</label>
+          <input type="password" [value]="" formControlName="password" id="password" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500">
+          <div *ngIf="sign_up_form.get('password')?.invalid && sign_up_form.get('password')?.touched" class="text-red-500 text-sm mt-1">
+            Please enter a valid password.
+          </div>
+        </div>
+        <div class="mb-4">
+          <label class="block text-gray-700 text-sm font-bold mb-2" for="date_embauche">Date embauche:</label>
+          <input type="date" [value]="utilisateur_en_cours.date_embauche" formControlName="date_embauche" id="date_embauche" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500">
+          <div *ngIf="sign_up_form.get('date_embauche')?.invalid && sign_up_form.get('date_embauche')?.touched" class="text-red-500 text-sm mt-1">
+            Please enter a valid date.
+          </div>
+        </div>
+        <p class="mb-4 w-full text-white bg-red-600 font-semibold empty:invisible rounded-md text-center shadow-sm shadow-black">{{ errors }}</p>
+        <p class="mb-4 w-full text-white bg-green-600 font-semibold empty:invisible rounded-md text-center shadow-sm shadow-black">{{ success }}</p>
+
+        <button type="submit" [disabled]="sign_up_form.invalid" class="w-full bg-blue-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline hover:bg-blue-600 disabled:bg-sky-200">
+          Enregistrer
+        </button>
+      </form>
+      <!-- <span class="font-medium bg-red-700 text-white text-justify rounded-md p-2 empty:hidden">{{ displayError }}</span>
+      <span class="font-medium bg-green-700 text-white  text-justify rounded-md p-2 empty:hidden">{{ displaySucess}}</span> -->
+  </div>
+  <div class="flex flex-grow rounded-md shadow-md shadow-slate-950 overflow-y-auto p-1">
+      <table class="table w-full h-fit border-collapse rounded-md">
+          <thead class="border-2 bg-slate-700 text-white font-bold rounded-md">
+            <th class="border-2 hover:bg-white/95 hover:border-b-red-600 hover:text-slate-950 ">#</th>
+            <th class="border-2 hover:bg-white/95 hover:border-b-red-600 hover:text-slate-950 ">Username</th>
+            <th class="border-2 hover:bg-white/95 hover:border-b-red-600 hover:text-slate-950 ">First Name</th>
+            <th class="border-2 hover:bg-white/95 hover:border-b-red-600 hover:text-slate-950 ">Last Name</th>
+            <th class="border-2 hover:bg-white/95 hover:border-b-red-600 hover:text-slate-950 ">Type</th>
+            <th class="border-2 hover:bg-white/95 hover:border-b-red-600 hover:text-slate-950 ">Adresse</th>
+            <th class="border-2 hover:bg-white/95 hover:border-b-red-600 hover:text-slate-950 ">Telephone</th>
+            <th class="border-2 hover:bg-white/95 hover:border-b-red-600 hover:text-slate-950">Date Embauche</th>
+            <th class="border-2 hover:bg-white/95 hover:border-b-red-600 hover:text-slate-950">Created by</th>
+            <th class="border-2 hover:bg-white/95 hover:border-b-red-600 hover:text-slate-950 ">Modified at</th>
+            <th class="border-2 hover:bg-white/95 hover:border-b-red-600 hover:text-slate-950">Modified by</th>
+            <th class="border-2 hover:bg-white/95 hover:border-b-red-600 hover:text-slate-950">Action</th>
+          </thead>
+          <tbody class="rounded-md bg-white">
+            <tr class="border-2 h-fit border-neutral-200 hover:border-red-700" *ngFor="let user of utilisateurs;index as i">
+              <ng-container *ngIf="(i % 2) === 0; else elseTemplate">
+              <td class="border-neutral-100 font-semibold border-x-2 h-fit p-2 hover:bg-sky-800 hover:transition-colors hover:text-white">{{user.id}}</td>
+              <td class="border-neutral-100 font-semibold border-x-2 h-fit p-2 hover:bg-sky-800 hover:transition-colors hover:text-white">{{user.username}}</td>
+              <td class="border-neutral-100 font-semibold border-x-2 h-fit p-2 hover:bg-sky-800 hover:transition-colors hover:text-white">{{user.first_name}}</td>
+              <td class="border-neutral-100 font-semibold border-x-2 h-fit p-2 hover:bg-sky-800 hover:transition-colors hover:text-white">{{user.last_name}}</td>
+              <td class="border-neutral-100 font-semibold border-x-2 h-fit p-2 hover:bg-sky-800 hover:transition-colors hover:text-white">{{user.type_utlisateur}}</td>
+              <td class="border-neutral-100 font-semibold border-x-2 h-fit p-2 hover:bg-sky-800 hover:transition-colors hover:text-white">{{user.addresse}}</td>
+              <td class="border-neutral-100 font-semibold border-x-2 h-fit p-2 hover:bg-sky-800 hover:transition-colors hover:text-white">{{user.telephone}}</td>
+              <td class="border-neutral-100 font-semibold border-x-2 h-fit p-2 hover:bg-sky-800 hover:transition-colors hover:text-white">{{user.date_embauche}}</td>
+              <td class="border-neutral-100 font-semibold border-x-2 h-fit p-2 hover:bg-sky-800 hover:transition-colors hover:text-white">{{user.created_by_name}}</td>
+              <td class="border-neutral-100 font-semibold border-x-2 h-fit p-2 hover:bg-sky-800 hover:transition-colors hover:text-white">{{user.modified_at}}</td>
+              <td class="border-neutral-100 font-semibold border-x-2 h-fit p-2 hover:bg-sky-800 hover:transition-colors hover:text-white">{{user.modified_by_name}}</td>
+              <td class="flex flex-col justify-center gap-1 h-full p-2 hover:bg-sky-800 hover:transition-colors hover:text-white">
+              <button class="bg-blue-500 text-white font-bold rounded-sm p-1 hover:bg-blue-900 hover:ring-2 hover:ring-blue-950" type="button" (click)="update(user)">Modifier</button>
+              <button class="bg-red-500 text-white font-bold rounded-sm p-1 hover:bg-red-800 hover:ring-2 hover:ring-red-950"  type="button" (click)="deleteUser(user.id)" >Supprimer</button>
+            </td>
+              </ng-container>
+              <ng-template #elseTemplate>
+                <td class="bg-slate-400 border-neutral-100 font-semibold border-x-2 h-fit p-2 hover:bg-sky-800 hover:transition-colors hover:text-white">{{user.id}}</td>
+                <td class="bg-slate-400 border-neutral-100 font-semibold border-x-2 h-fit p-2 hover:bg-sky-800 hover:transition-colors hover:text-white">{{user.username}}</td>
+                <td class="bg-slate-400 border-neutral-100 font-semibold border-x-2 h-fit p-2 hover:bg-sky-800 hover:transition-colors hover:text-white">{{user.first_name}}</td>
+                <td class="bg-slate-400 border-neutral-100 font-semibold border-x-2 h-fit p-2 hover:bg-sky-800 hover:transition-colors hover:text-white">{{user.last_name}}</td>
+                <td class="bg-slate-400 border-neutral-100 font-semibold border-x-2 h-fit p-2 hover:bg-sky-800 hover:transition-colors hover:text-white">{{user.type_utlisateur}}</td>
+                <td class="bg-slate-400 border-neutral-100 font-semibold border-x-2 h-fit p-2 hover:bg-sky-800 hover:transition-colors hover:text-white">{{user.addresse}}</td>
+                <td class="bg-slate-400 border-neutral-100 font-semibold border-x-2 h-fit p-2 hover:bg-sky-800 hover:transition-colors hover:text-white">{{user.telephone}}</td>
+                <td class="bg-slate-400 border-neutral-100 font-semibold border-x-2 h-fit p-2 hover:bg-sky-800 hover:transition-colors hover:text-white">{{user.date_embauche}}</td>
+                <td class="bg-slate-400 border-neutral-100 font-semibold border-x-2 h-fit p-2 hover:bg-sky-800 hover:transition-colors hover:text-white">{{user.created_by_name}}</td>
+                <td class="bg-slate-400 border-neutral-100 font-semibold border-x-2 h-fit p-2 hover:bg-sky-800 hover:transition-colors hover:text-white">{{user.modified_at}}</td>
+                <td class="bg-slate-400 border-neutral-100 font-semibold border-x-2 h-fit p-2 hover:bg-sky-800 hover:transition-colors hover:text-white">{{user.modified_by_name}}</td>
+              <td class="bg-slate-400 flex flex-col justify-center gap-1 h-full p-2 hover:bg-sky-800 hover:transition-colors hover:text-white">
+              <button class="bg-blue-500 text-white font-bold rounded-sm p-1 hover:bg-blue-900 hover:ring-2 hover:ring-blue-950" type="button"  (click)="update(user)">Modifier</button>
+              <button class="bg-red-500 text-white font-bold rounded-sm p-1 hover:bg-red-800 hover:ring-2 hover:ring-red-950" type="button" (click)="deleteUser(user.id)">Supprimer</button>
+            </td>
+            </ng-template>
+            </tr>
+
+          </tbody>
+      </table>
+  </div>
+</div>

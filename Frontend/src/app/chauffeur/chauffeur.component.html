@@ -1,0 +1,24 @@
+<div class="flex flex-col w-full justify-around text-slate-950">
+  <section class="bg-slate-50 m-4 p-8 shadow-lg shadow-black">
+    <h1 class="text-xl text-red-600 font-bold uppercase">Informations persoenlles</h1>
+    <div><span class="font-bold text-xl">Username: </span> <span class="font-semibold uppercase text-base">{{ chauffeur.username }}</span></div>
+    <div><span class="font-bold text-xl">First name: </span> <span class="font-semibold uppercase text-base">{{ chauffeur.first_name }}</span></div>
+    <div><span class="font-bold text-xl">Last name: </span> <span class="font-semibold uppercase text-base">{{ chauffeur.last_name }}</span></div>
+    <div><span class="font-bold text-xl">Telephone: </span> <span class="font-semibold uppercase text-base">{{ chauffeur.telephone }}</span></div>
+    <div><span class="font-bold text-xl">Addresse: </span> <span class="font-semibold uppercase text-base">{{ chauffeur.addresse }}</span></div>
+    <div><span class="font-bold text-xl">Date embauche: </span> <span class="font-semibold uppercase text-base">{{ chauffeur.date_embauche }}</span></div>
+  </section>
+  <section class="m-4 p-4 shadow-lg shadow-black">
+    <h1 class="text-xl text-red-600 font-bold uppercase bg-slate-50 p-4"> Contrats</h1>
+    <div *ngFor="let contrat of contrats;index as i" class="mt-2 border-b-2 border-black bg-slate-50 p-4">
+      <h1 class="text-black font-bold text-xl uppercase"> Contrat {{i+1}}</h1>
+      <div><span class="font-bold text-xl">Moto: </span> <span class="font-semibold uppercase text-base">{{ contrat.moto_numero_serie }}</span></div>
+      <div><span class="font-bold text-xl">Type: </span> <span class="font-semibold uppercase text-base">{{ contrat.type_contrat }}</span></div>
+      <div><span class="font-bold text-xl">Montant Initial: </span> <span class="font-semibold uppercase text-base">{{ contrat.montant_initial }}</span></div>
+      <div><span class="font-bold text-xl">Montant journalier: </span> <span class="font-semibold uppercase text-base">{{ contrat.montant_journalier }}</span></div>
+      <div><span class="font-bold text-xl">Date debut: </span> <span class="font-semibold uppercase text-base">{{ contrat.date_debut }}</span></div>
+      <div><span class="font-bold text-xl">Date fin: </span> <span class="font-semibold uppercase text-base">{{ contrat.date_fin }}</span></div>
+      <div><span class="font-bold text-xl">Etat: </span> <span class="font-semibold uppercase text-base">{{ contrat.etat }}</span></div>
+    </div>
+    </section>
+</div>

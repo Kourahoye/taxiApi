@@ -1,0 +1,69 @@
+<div class="flex flex-col sm:flex-row  h-full md:max-h-[85vh] w-ful mt-2 gap-3 m-1 p-2">
+  <div class="flex flex-col shadow-inner shadow-slate-950 w-full rounded-md sm:flex-shrink-0 p-1 bg-zinc-300 sm:w-1/3">
+      <h1 class="text-2xl shadow-md shadow-white flex w-full justify-center uppercase font-bold bg-sky-600 p-2 text-white border-2 border-neutral-100" *ngIf="actionOnGoing=='Creation'">Declaration entretien</h1>
+      <h1 class="text-2xl shadow-md shadow-white flex w-full justify-center uppercase font-bold bg-red-600 p-2 text-white border-2 border-neutral-100" *ngIf="actionOnGoing!='Creation'">{{ actionOnGoing }} entretien</h1>
+      <form class="flex gap-2 flex-col p-1 h-fit bg-white/70 shadow-sm shadow-black overflow-y-auto" [formGroup]="myForm" (submit)="enregistrer()">
+          <div class="flex flex-col">
+            <label class="text-slate-950 font-bold text-lg mx-3" for="moto">Moto</label>
+            <select  type="text" id="moto" class="tracking-tight text-black font-mono ring-1 ring-zinc-400 mt-2 p-1  mx-4 shadow-sm shadow-black rounded-sm hover:right-2 hover:ring-gray-600" formControlName="moto" [value]="entretien_en_cours.moto">
+                <option value="{{ moto.id }}" *ngFor="let moto of motos">Moto:{{ moto.numero_serie}}</option>
+            </select>
+          </div>
+          <div class="flex flex-col">
+            <label class="text-slate-950 font-bold text-lg mx-3" for="nom">Type Entretien</label>
+            <input  type="text" id="nom" class=" tracking-tight text-black font-mono ring-1 ring-zinc-400 mt-2 p-1  mx-4 shadow-sm shadow-black rounded-sm hover:right-2 hover:ring-gray-600" formControlName="type_entretien" [value]="entretien_en_cours.type_entretien">
+          </div>
+          <div class="flex flex-col">
+            <label class="text-slate-950 font-bold text-lg mx-3" for="date_entretien">Date entretien:</label>
+            <input  type="date" id="date_entretien" class=" tracking-tight text-black font-mono ring-1 ring-zinc-400 mt-2 p-1  mx-4 shadow-sm shadow-black rounded-sm hover:right-2 hover:ring-gray-600" formControlName="date_entretien" [value]="entretien_en_cours.date_entretien">
+          </div>
+          <button  type="submit" class="m-4 ring-1 ring-gray-600 bg-slate-800 text-white font-bold hover:ring-2 disabled:bg-red-800/50 disabled:font-extrabold hover:ring-slate-900 hover:bg-slate-800 rounded-md shadow-md shadow-white uppercase text-lg" [disabled]="myForm.invalid"> Enregistrer</button>
+      </form>
+      <span class="font-medium bg-red-700 text-white text-justify rounded-md p-2 empty:hidden">{{ displayError }}</span>
+      <span class="font-medium bg-green-700 text-white  text-justify rounded-md p-2 empty:hidden">{{ displaySucess}}</span>
+  </div>
+  <div class="flex flex-grow rounded-md shadow-md shadow-slate-950 overflow-y-auto p-1">
+      <table class="table w-full h-fit border-collapse rounded-md">
+          <thead class="border-2 bg-slate-700 text-white font-bold rounded-md">
+            <th class="border-2 hover:bg-white/95 hover:border-b-red-600 hover:text-slate-950 ">#</th>
+            <th class="border-2 hover:bg-white/95 hover:border-b-red-600 hover:text-slate-950 ">Moto</th>
+            <th class="border-2 hover:bg-white/95 hover:border-b-red-600 hover:text-slate-950 ">Type Entretien</th>
+            <th class="border-2 hover:bg-white/95 hover:border-b-red-600 hover:text-slate-950">Created at</th>
+            <th class="border-2 hover:bg-white/95 hover:border-b-red-600 hover:text-slate-950">Created by</th>
+            <th class="border-2 hover:bg-white/95 hover:border-b-red-600 hover:text-slate-950 ">Modified at</th>
+            <th class="border-2 hover:bg-white/95 hover:border-b-red-600 hover:text-slate-950">Modified by</th>
+            <th class="border-2 hover:bg-white/95 hover:border-b-red-600 hover:text-slate-950">Action</th>
+          </thead>
+          <tbody class="rounded-md bg-white">
+            <tr class="border-2 h-fit border-neutral-200 hover:border-red-700" *ngFor="let entretien of entretiens;index as i">
+              <ng-container *ngIf="(i % 2) === 0; else elseTemplate">
+              <td class="border-neutral-100 font-semibold border-x-2 h-fit p-2 hover:bg-sky-800 hover:transition-colors hover:text-white">{{entretien.id}}</td>
+              <td class="border-neutral-100 font-semibold border-x-2 h-fit p-2 hover:bg-sky-800 hover:transition-colors hover:text-white">{{entretien.moto_numero_serie}}</td>
+              <td class="border-neutral-100 font-semibold border-x-2 h-fit p-2 hover:bg-sky-800 hover:transition-colors hover:text-white">{{entretien.type_entretien}}</td>
+              <td class="border-neutral-100 font-semibold border-x-2 h-fit p-2 hover:bg-sky-800 hover:transition-colors hover:text-white">{{entretien.created_at}}</td>
+              <td class="border-neutral-100 font-semibold border-x-2 h-fit p-2 hover:bg-sky-800 hover:transition-colors hover:text-white">{{entretien.created_by_name}}</td>
+              <td class="border-neutral-100 font-semibold border-x-2 h-fit p-2 hover:bg-sky-800 hover:transition-colors hover:text-white">{{entretien.modified_at}}</td>
+              <td class="border-neutral-100 font-semibold border-x-2 h-fit p-2 hover:bg-sky-800 hover:transition-colors hover:text-white">{{entretien.modified_by_name}}</td>
+              <td class="flex flex-col justify-center gap-1 h-full p-2 hover:bg-sky-800 hover:transition-colors hover:text-white">
+              <button class="bg-blue-500 text-white font-bold rounded-sm p-1 hover:bg-blue-900 hover:ring-2 hover:ring-blue-950" type="button" (click)="update(entretien)">Modifier</button>
+              <button class="bg-red-500 text-white font-bold rounded-sm p-1 hover:bg-red-800 hover:ring-2 hover:ring-red-950"  type="button" (click)="deleteEntretien(entretien.id)" >Supprimer</button>
+            </td>
+              </ng-container>
+              <ng-template #elseTemplate>
+                <td class="bg-slate-400 border-neutral-100 font-semibold border-x-2 h-fit p-2 hover:bg-sky-800 hover:transition-colors hover:text-white">{{entretien.id}}</td>
+                <td class="bg-slate-400 border-neutral-100 font-semibold border-x-2 h-fit p-2 hover:bg-sky-800 hover:transition-colors hover:text-white">{{entretien.moto_numero_serie}}</td>
+                <td class="bg-slate-400 border-neutral-100 font-semibold border-x-2 h-fit p-2 hover:bg-sky-800 hover:transition-colors hover:text-white">{{entretien.type_entretien}}</td>                <td class="bg-slate-400 border-neutral-100 font-semibold border-x-2 h-fit p-2 hover:bg-sky-800 hover:transition-colors hover:text-white">{{entretien.created_at}}</td>
+                <td class="bg-slate-400 border-neutral-100 font-semibold border-x-2 h-fit p-2 hover:bg-sky-800 hover:transition-colors hover:text-white">{{entretien.created_by_name}}</td>
+                <td class="bg-slate-400 border-neutral-100 font-semibold border-x-2 h-fit p-2 hover:bg-sky-800 hover:transition-colors hover:text-white">{{entretien.modified_at}}</td>
+                <td class="bg-slate-400 border-neutral-100 font-semibold border-x-2 h-fit p-2 hover:bg-sky-800 hover:transition-colors hover:text-white">{{entretien.modified_by_name}}</td>
+              <td class="bg-slate-400 flex flex-col justify-center gap-1 h-full p-2 hover:bg-sky-800 hover:transition-colors hover:text-white">
+              <button class="bg-blue-500 text-white font-bold rounded-sm p-1 hover:bg-blue-900 hover:ring-2 hover:ring-blue-950" type="button"  (click)="update(entretien)">Modifier</button>
+              <button class="bg-red-500 text-white font-bold rounded-sm p-1 hover:bg-red-800 hover:ring-2 hover:ring-red-950" type="button" (click)="deleteEntretien(entretien.id)">Supprimer</button>
+            </td>
+            </ng-template>
+            </tr>
+
+          </tbody>
+      </table>
+  </div>
+</div>
