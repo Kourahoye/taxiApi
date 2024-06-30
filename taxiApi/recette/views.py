@@ -1,5 +1,8 @@
+from rest_framework.response import Response
+from django.utils import timezone
 from rest_framework import mixins, generics
 from .serializers import RecetteSerializer
+from rest_framework import status
 from .models import Recette
 from rest_framework.permissions import IsAuthenticated
 
@@ -17,6 +20,9 @@ class RecetteGenericAPIView(
         return self.list(request)
 
     def post(self, request):
+        date =  timezone.datetime.strptime(request.data.get('date'),"%Y-%m-%d").date()
+        if date > timezone.now().date():
+            return Response({'error':'La date est incorrecte'},status=status.HTTP_400_BAD_REQUEST)
         response = self.create(request)
         return response
 

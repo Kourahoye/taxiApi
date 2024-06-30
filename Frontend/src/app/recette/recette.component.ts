@@ -68,7 +68,7 @@ export class RecetteComponent {
     })
   }
   getusers(){
-    this.userService.getUser().subscribe({
+    this.userService.getChauffeur().subscribe({
       next:(response)=>{
         //console.log(response)
         this.chauffeurs = response
@@ -105,7 +105,7 @@ export class RecetteComponent {
           },
           error:(error)=>{
             console.error(error)
-            this.displayError  =  error.error
+            this.displayError  =  error.error.error
             this.displaySucess = ""
           }
         })
@@ -121,7 +121,10 @@ export class RecetteComponent {
           this.displaySucess = "Modification effectuer"
           this.displayError = ""
         },
-        error:(error)=>console.error(error)
+        error:(error)=>{
+          this.displayError = error.error.error
+          console.error(error)
+        },
       })
     }
     this.displayError = ""

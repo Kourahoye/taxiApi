@@ -10,6 +10,7 @@ class ContratGenericAPIView(
     generics.GenericAPIView, mixins.ListModelMixin, mixins.CreateModelMixin, mixins.UpdateModelMixin,
     mixins.RetrieveModelMixin, mixins.DestroyModelMixin):
     queryset = Contrat.objects.all()
+    permission_classes = [IsAuthenticated]
     serializer_class = ContratSerializer
     
     def get(self, request, pk=None):

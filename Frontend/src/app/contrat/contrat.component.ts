@@ -84,7 +84,7 @@ export class ContratComponent {
     })
   }
   getMotos(){
-    this.motoService.getMoto().subscribe({
+    this.motoService.getfreeMoto().subscribe({
       next:(response)=>{
         //console.log(response)
         this.motos = response
@@ -93,9 +93,9 @@ export class ContratComponent {
     })
   }
   getChauffeurs(){
-    this.userService.getUser().subscribe({
+    this.userService.getFreeUser().subscribe({
       next:(response)=>{
-        //console.log(response)
+        console.log(response)
         this.chauffeurs = response
       },
       error:(error)=>console.log(error)
@@ -125,6 +125,8 @@ export class ContratComponent {
           next:(response)=>{
             this.myForm.reset()
             this.getContrats()
+            this.getMotos()
+            this.getChauffeurs()
             console.log(response)
             this.displaySucess = "Enregistrement effectuer"
             this.displayError = ""

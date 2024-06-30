@@ -8,6 +8,9 @@ import { Observable } from 'rxjs'
   providedIn: 'root'
 })
 export class MotoService {
+  getfreeMoto(): Observable<Moto[]> {
+    return this.http.get<Moto[]>(`${this.BASE_URL}/motos/freemotos/`,);
+  }
   constructor(private http: HttpClient) { }
 
   BASE_URL = "http://localhost:8000";

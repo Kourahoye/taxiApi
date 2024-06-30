@@ -1,16 +1,17 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { ContratComponent } from './contrat/contrat.component';
-import { EntretienComponent } from './entretien/entretien.component';
-import { authGuard } from './guards/auth.guard';
-import { authchildGuard } from './guards/authchild.guard';
-import { HomePageComponent } from './home-page/home-page.component';
-import { MotoComponent } from './moto/moto.component';
-import { NotFoundComponent } from './not-found/not-found.component';
-import { PanneComponent } from './panne/panne.component';
-import { RecetteComponent } from './recette/recette.component';
-import { LoginComponent } from './users/login/login.component';
-import { SignUpComponent } from './users/sign-up/sign-up.component';
+import { NgModule } from "@angular/core";
+import { Routes, RouterModule } from "@angular/router";
+import { ContratComponent } from "./contrat/contrat.component";
+import { EntretienComponent } from "./entretien/entretien.component";
+import { authGuard } from "./guards/auth.guard";
+import { authchildGuard } from "./guards/authchild.guard";
+import { HomePageComponent } from "./home-page/home-page.component";
+import { MotoComponent } from "./moto/moto.component";
+import { NotFoundComponent } from "./not-found/not-found.component";
+import { PanneComponent } from "./panne/panne.component";
+import { RecetteComponent } from "./recette/recette.component";
+import { LoginComponent } from "./users/login/login.component";
+import { SignUpComponent } from "./users/sign-up/sign-up.component";
+
 
 const routes: Routes =[
   { path: '', component: LoginComponent, title: 'Login' },
@@ -29,7 +30,7 @@ const routes: Routes =[
 ]
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
 export class AppRoutingModule {

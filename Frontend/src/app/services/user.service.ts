@@ -8,7 +8,12 @@ import { Userlogin } from '../interfaces/userlogin';
   providedIn: 'root'
 })
 export class UserService {
+  getChauffeur(): Observable<User[]> {
+    return this.http.get<User[]>(`${this.BASE_URL}/users/allChauffeurs/`)
+  }
+
   private token: any;
+
 
   constructor(private http: HttpClient) { }
 
@@ -54,6 +59,9 @@ export class UserService {
     data.modified_by = Number(user_id)
     data.created_by = Number(user_id)
     return this.http.put<User>(`${this.BASE_URL}/users/${id_User}/`, data)
+  }
+  getFreeUser():Observable<User[]> {
+    return this.http.get<User[]>(`${this.BASE_URL}/users/chauffeurs/`)
   }
 
   getSingleUser(id_User: number): Observable<User> {

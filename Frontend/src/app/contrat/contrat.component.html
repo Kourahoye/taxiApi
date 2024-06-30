@@ -5,10 +5,10 @@
       <form [formGroup]="myForm" class="max-w-md p-8 bg-white bg-opacity-75 shadow-md rounded-md" (ngSubmit)="enregistrer()" method="post">
         <div class="mb-4">
           <label class="block text-gray-700 text-sm font-bold mb-2" for="chauffeur">
-             Utlisateur
+             Chauffeur
           </label>
           <select id="chauffeur" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500" contenteditable="false"  [value]="contrat_en_cours.chauffeur" formControlName="chauffeur">
-            <option  value="{{ chauffeur.id }}" class="rounded-full text-black hover:bg-sky-600" *ngFor="let chauffeur of chauffeurs">{{ chauffeur.username }}</option>
+            <option  value="{{ chauffeur.id }}" class="rounded-full text-black hover:bg-sky-600" *ngFor="let chauffeur of chauffeurs">Chauffeur-{{ chauffeur.username }}</option>
            </select>
         </div>
         <div class="mb-4">
